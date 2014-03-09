@@ -14,7 +14,7 @@ export default Em.Controller.extend({
   generateLetter: function() {
     Em.debug("Generating random letter");
     var chars='abcdefghijklmnopqrstuvwxyz';
-    this.set('randomLetter', chars[Math.round(Math.random() * (chars.length - 1))]);
+    this.set('randomLetter', chars.charAt(Math.floor(Math.random() * chars.length)));
   },
   updateStreakDetail: function(success, el) {
     this.get('streakDetail').reverseObjects();
@@ -29,7 +29,7 @@ export default Em.Controller.extend({
     if (Em.isEmpty(this.get('enteredLetter'))) {
       return;
     }
-    var el = this.get('enteredLetter'),
+    var el = this.get('enteredLetter').toLowerCase(),
         al = this.get('randomLetter'),
         success = Boolean(el === al),
         streak = (success) ? this.get('winningStreak') + 1 : 0;
